@@ -6,12 +6,6 @@ class Node():
     self.right = None
     self.color = color # 'red' | 'black'
 
-def make_tree(keys): # return Node
-    tree = None
-    for key in keys:
-        tree = insert(tree, key)
-    return tree
-
 def insert(node, x, color=None): # return Node
     if node is None: 
         return Node(x, color)
@@ -21,23 +15,23 @@ def insert(node, x, color=None): # return Node
         node.right = insert(node.right, x, color)
     return node
 
-def search(tree, x): # return Node
-  return _search_with_parent(tree, x)[0]
+def search(node, x): # return Node
+  return _search_with_parent(node, x)[0]
   
-def get_parent(tree, x): # return Node
-  return _search_with_parent(tree, x)[1]
+def get_parent(node, x): # return Node
+  return _search_with_parent(node, x)[1]
 
-def delete(tree, key): # return Node
-  target_node, parent_node = _search_with_parent(tree, key)    
-  if target_node == tree: 
-    tree = _delete_node(target_node)
+def delete(node, key): # return Node
+  target_node, parent_node = _search_with_parent(node, key)    
+  if target_node == node: 
+    node = _delete_node(target_node)
   elif target_node == parent_node.left:
     parent_node.left = _delete_node(target_node)
   elif target_node == parent_node.right:
     parent_node.right = _delete_node(target_node)
-  return tree
+  return node
 
-def get_uncle(node, x):
+def get_uncle(node, x): # return Node
   parent = get_parent(node, x)
   grand_parent = get_parent(node, parent.key)
   if grand_parent is not None:
@@ -47,7 +41,7 @@ def get_uncle(node, x):
       return grand_parent.left
   return None
 
-def _search_with_parent(node, x, parent=None): # return (Node, Node)
+def _search_with_parent(node, x, parent=None): # private / return (Node, Node)
   if node is None or node.key == x: 
     return node, parent
   if x < node.key: 
@@ -73,7 +67,13 @@ def _delete_node(node): # private / return Node
     elif s.right is not None: 
       s_parent.left = s.right
     return node
-  
+
+def make_tree(keys): # return Node
+    tree = None
+    for key in keys:
+        tree = insert(tree, key)
+    return tree
+
 def print_tree(t): # void
   import queue
   if t == None:
@@ -92,7 +92,7 @@ def print_tree(t): # void
       print(u.right.key, end="")
     print()
 
-def _test(): # example code
+def _test(): # example code for Test
   keys = [30, 20, 25, 40, 10, 35]
   tree = make_tree(keys)
   tree = insert(tree, 55)
