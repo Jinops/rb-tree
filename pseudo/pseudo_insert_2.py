@@ -28,9 +28,9 @@ def insert_case_3(node):
   else:
     uncle = grand_parent.left
   if uncle.color='red':
-    parent='black'
-    uncle='black'
-    parent.parent='red'
+    parent.color='black'
+    uncle.color='black'
+    grand_parent.color='red'
     insert_case_1(grand_parent)
   else:
     insert_case_4(node)
