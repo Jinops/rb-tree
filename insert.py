@@ -39,9 +39,24 @@ def insert_case_3(tree, node, parent):
 def insert_case_4(tree, node, parent, grand_parent):
   # print('insert_case_4', tree.key, node.key, parent.key, grand_parent.key)
   if node==parent.left and parent==grand_parent.left:
-    print('rotate_right')
+    print('rotate_right(grand_parent)')
+    node = node.left
   else:
-    print('rotate_left')
+    print('rotate_left(grand_parent)')
+    node = node.right
+  insert_case_5(tree, node)
+    
+def insert_case_5(tree, node): # TODO: not work
+  parent = bst.get_parent(tree, node)
+  grand_parent = bst.get_parent(tree, parent)
+  parent.color = 'black'
+  grand_parent.color = 'red'
+
+  if node==parent.left:
+    print('rotate_right(grand_parent)')
+  else:
+    print('rotate_left(grand_parent)')
+
 
 def make_tree(keys): # return Node
     tree = None

@@ -3,7 +3,7 @@ insert(tree, key){
   node.left <- NIL;
   node.right <- NIL;
 
-  tree.bst_insert(node);
+  bst_insert(tree, node);
   insert_case_1(node);
 }
 
