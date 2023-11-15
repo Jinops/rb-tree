@@ -6,9 +6,10 @@ def insert(tree, key):
   node.color = 'red'
   tree = bst.insert(tree, node)
   insert_case_1(tree, node)
+  return tree
 
 def insert_case_1(tree, node):
-  #print('insert_case_1', node.key)
+  # print('insert_case_1', tree.key, node.key)
   parent = bst.get_parent(tree, node.key)
   if parent is None:
     node.color='black'
@@ -17,20 +18,16 @@ def insert_case_1(tree, node):
     insert_case_2(tree, node, parent)
 
 def insert_case_2(tree, node, parent):
-  #print('insert_case_2', node.key, parent.key)
+  # print('insert_case_2', tree.key, node.key, parent.key)
   if parent.color=='black':
     return
   else:
     insert_case_3(tree, node, parent)
 
 def insert_case_3(tree, node, parent):
-  #print('insert_case_3', node.key, parent.key)
+  # print('insert_case_3', tree.key, node.key, parent.key)
   grand_parent = bst.get_parent(tree, parent.key)
-  uncle=None
-  if grand_parent.left == parent:
-    uncle = grand_parent.right
-  else:
-    uncle = grand_parent.left
+  uncle = bst.get_uncle(tree, parent.key)
   if uncle is not None and uncle.color=='red':
     parent.color='black'
     uncle.color='black'
@@ -40,22 +37,22 @@ def insert_case_3(tree, node, parent):
     insert_case_4(tree, node, parent, grand_parent)
 
 def insert_case_4(tree, node, parent, grand_parent):
-  #print('insert_case_4', node.key, parent.key, grand_parent.key)
+  # print('insert_case_4', tree.key, node.key, parent.key, grand_parent.key)
   if node==parent.left and parent==grand_parent.left:
     print('rotate_right')
   else:
     print('rotate_left')
 
-tree = bst.make_tree([30, 20, 25, 40, 10, 35])
-insert(tree, 55)
-tree.display()
-insert(tree, 3)
-tree.display()
-insert(tree, 30)
-tree.display()
-insert(tree, 40)
-tree.display()
-insert(tree, 50)
-tree.display()
-insert(tree, 60)
+def make_tree(keys): # return Node
+    tree = None
+    for idx, key in enumerate(keys):
+      print(idx, key)
+      if idx==0:
+        tree = insert(tree, key)
+      else:
+        insert(tree, key)
+      
+    return tree
+
+tree = make_tree([30, 20, 25, 40, 10, 35, 66, 33, 1, 2, 5, 19, 20])
 tree.display()

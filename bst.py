@@ -87,9 +87,9 @@ def delete(node, key): # return Node
     parent_node.right = _delete_node(target_node)
   return node
 
-def get_uncle(node, x): # return Node
-  parent = get_parent(node, x)
-  grand_parent = get_parent(node, parent.key)
+def get_uncle(tree, x): # return Node
+  parent = get_parent(tree, x)
+  grand_parent = get_parent(tree, parent.key)
   if grand_parent is not None:
     if grand_parent.left is parent:
       return grand_parent.right
