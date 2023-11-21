@@ -15,4 +15,4 @@ def draw(root):
             add_nodes_edges(node.right)
 
     add_nodes_edges(root)
-    dot.render('binary_tree', view=True, format='png')
+    dot.render('tree', view=True, format='png')
