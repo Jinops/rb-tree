@@ -1,4 +1,5 @@
 import bst
+from draw import draw
 from bst import Node
 
 def insert(tree, key):
@@ -44,11 +45,12 @@ def insert_case_4(tree, node, parent, grand_parent):
   else:
     print('rotate_left(grand_parent)')
     node = node.right
-  insert_case_5(tree, node)
+  # insert_case_5(tree, node)
     
 def insert_case_5(tree, node): # TODO: not work
-  parent = bst.get_parent(tree, node)
-  grand_parent = bst.get_parent(tree, parent)
+  # print('insert_case_5', tree.key, node.key)
+  parent = bst.get_parent(tree, node.key)
+  grand_parent = bst.get_parent(tree, parent.key)
   parent.color = 'black'
   grand_parent.color = 'red'
 
@@ -69,5 +71,6 @@ def make_tree(keys): # return Node
       
     return tree
 
-tree = make_tree([30, 20, 25, 40, 10, 35, 66, 33, 1, 2, 5, 19, 20])
+tree = make_tree([30, 20, 25, 40, 10, 35, 66, 33, 1, 2, 5, 19])
 tree.display()
+draw(tree)
