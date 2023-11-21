@@ -1,25 +1,21 @@
 digraph {
-	30 [color=black]
-	20 [color=red]
-	30 -> 20
-	10 [color=red]
-	20 -> 10
-	1 [color=black]
-	10 -> 1
-	2 [color=red]
-	1 -> 2
-	5 [color=red]
-	2 -> 5
-	19 [color=red]
-	10 -> 19
-	25 [color=black]
-	20 -> 25
-	40 [color=black]
-	30 -> 40
-	35 [color=black]
-	40 -> 35
-	33 [color=red]
-	35 -> 33
-	66 [color=red]
-	40 -> 66
+	3 [color=black]
+	2 [color=black]
+	3 -> 2
+	1 [color=red]
+	2 -> 1
+	44 [color=red]
+	3 -> 44
+	13 [color=black]
+	44 -> 13
+	4 [color=red]
+	13 -> 4
+	5 [color=black]
+	4 -> 5
+	8 [color=red]
+	5 -> 8
+	15 [color=black]
+	13 -> 15
+	22 [color=red]
+	15 -> 22
 }

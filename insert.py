@@ -1,5 +1,4 @@
 import bst
-from draw import draw
 from bst import Node
 
 def insert(tree, key):
@@ -70,7 +69,3 @@ def make_tree(keys): # return Node
         insert(tree, key)
       
     return tree
-
-tree = make_tree([30, 20, 25, 40, 10, 35, 66, 33, 1, 2, 5, 19])
-tree.display()
-draw(tree)

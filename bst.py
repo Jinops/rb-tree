@@ -65,6 +65,9 @@ class Node():
 def insert(tree, node): # return Node
     if tree is None: 
         return node
+    if node.key == tree.key:
+        print(f"Duplicated key: {node.key}")
+        return tree
     if node.key < tree.key: 
         tree.left = insert(tree.left, node)
     else:
