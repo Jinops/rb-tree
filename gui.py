@@ -77,6 +77,8 @@ def run(node):
   app = QApplication(sys.argv)
   ex = MyApp(node)
   sys.exit(app.exec_())
+  gui.run(tree)
 
-if __name__ == '__main__':
-    run(None)
+if __name__ == "__main__":
+    keys = [30, 20, 25, 40, 10, 35, 22, 13]
+    run(insert.make_tree(keys))
