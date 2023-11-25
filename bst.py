@@ -18,11 +18,11 @@ def insert(tree, node): # return Node
         tree.right = insert(tree.right, node)
     return tree
 
-def search(tree, x): # return Node
-  return _search_with_parent(tree, x)[0]
+def search(tree, key): # return Node
+  return _search_with_parent(tree, key)[0]
   
-def get_parent(tree, x): # return Node
-  return _search_with_parent(tree, x)[1]
+def get_parent(tree, key): # return Node
+  return _search_with_parent(tree, key)[1]
 
 def delete(node, key): # return Node
   target_node, parent_node = _search_with_parent(node, key)    
@@ -34,8 +34,8 @@ def delete(node, key): # return Node
     parent_node.right = _delete_node(target_node)
   return node
 
-def get_uncle(tree, x): # return Node
-  parent = get_parent(tree, x)
+def get_uncle(tree, key): # return Node
+  parent = get_parent(tree, key)
   grand_parent = get_parent(tree, parent.key)
   if grand_parent is not None:
     if grand_parent.left is parent:
@@ -44,13 +44,13 @@ def get_uncle(tree, x): # return Node
       return grand_parent.left
   return None
 
-def _search_with_parent(node, x, parent=None): # private / return (Node, Node)
-  if node is None or node.key == x: 
+def _search_with_parent(node, key, parent=None): # private / return (Node, Node)
+  if node is None or node.key == key: 
     return node, parent
-  if x < node.key: 
-    return _search_with_parent(node.left, x, node)
+  if key < node.key: 
+    return _search_with_parent(node.left, key, node)
   else:
-    return _search_with_parent(node.right, x, node)
+    return _search_with_parent(node.right, key, node)
     
 def _delete_node(node): # private / return Node
   if node.left is None and node.right is None: 
