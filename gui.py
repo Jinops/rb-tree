@@ -7,9 +7,9 @@ from PyQt5.QtCore import Qt
 from functools import partial
 
 class MyApp(QWidget):
-  def __init__(self, node):
+  def __init__(self, rbtree):
       super().__init__()
-      self.node = node
+      self.rbtree = insert.RBTree() if rbtree is None else rbtree
       self.initUI()
 
   def initUI(self):
@@ -55,10 +55,7 @@ class MyApp(QWidget):
     
     num = int(num)
     if value == 'insert':
-      if self.node == None:
-        self.node = insert.insert(self.node, num)
-      else:
-         insert.insert(self.node, num)
+      self.rbtree.insert(num)
     elif value == 'delete':
        pass # TODO
     elif value == 'search':
@@ -70,15 +67,15 @@ class MyApp(QWidget):
     self.edit_num.clear()
 
   def update_image_label(self):
-    draw(self.node)
+    draw(self.rbtree.root)
     self.img_label.setPixmap(QPixmap('tree.png'))
 
-def run(node):
+def run(rbtree):
   app = QApplication(sys.argv)
-  ex = MyApp(node)
+  ex = MyApp(rbtree)
   sys.exit(app.exec_())
-  gui.run(tree)
 
 if __name__ == "__main__":
     keys = [30, 20, 25, 40, 10, 35, 22, 13]
-    run(insert.make_tree(keys))
+    rbtree = insert.make_tree(keys)
+    run(rbtree)
