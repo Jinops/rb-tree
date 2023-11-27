@@ -4,7 +4,7 @@ from delete import *
 class RBTree(RBTreeInsert, RBTreeDelete):
   pass
 
-def make_tree(keys): # return Node
+def generate(keys): # return Node
     tree = RBTree()
     for key in keys:
         tree.insert(key)
@@ -12,5 +12,5 @@ def make_tree(keys): # return Node
   
 if __name__ == "__main__":
   keys = [1, 10, 13]
-  tree = make_tree(keys)
+  tree = generate(keys)
   #tree.display()

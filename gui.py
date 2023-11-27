@@ -1,5 +1,5 @@
 import sys
-import rbtree
+import rbtree.rbtree as rbtree
 from draw import draw
 from PyQt5.QtWidgets import (QApplication, QWidget, QGridLayout, QLineEdit, QPushButton, QLabel)
 from PyQt5.QtGui import QPixmap
@@ -77,5 +77,5 @@ def run(rbtree):
 
 if __name__ == "__main__":
     keys = [30, 20, 25, 40, 10, 35, 22, 13]
-    rbtree = rbtree.make_tree(keys)
-    run(rbtree)
+    tree = rbtree.generate(keys)
+    run(tree)
