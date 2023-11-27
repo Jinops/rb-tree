@@ -1,19 +1,17 @@
-from bst import Node, get_uncle
+from rotate import *
 
-class RBTree:
-  def __init__(self):
-     self.root = None
+class RBTreeInsert(RBTreeRotate):
   def insert(self, key):
     print('<insert>', key)
-    node = self.bst_insert(key)
+    node = self._bst_insert(key)
     if node is None:
       return
     if self.root is None:
        self.root = node
-    self.insert_case_1(node)
+    self._insert_case_1(node)
     # self.display()
 
-  def bst_insert(self, key):
+  def _bst_insert(self, key):
     return self._bst_insert_recur(self.root, key)[1]
 
   def _bst_insert_recur(self, node, key, parent=None): # return [node for recursive, new node]
@@ -29,40 +27,40 @@ class RBTree:
           node.right, new_node = self._bst_insert_recur(node.right, key, node)
       return node, new_node
   
-  def insert_case_1(self, node):
+  def _insert_case_1(self, node):
     # self.display()
-    print('insert_case_1', node.key)
+    print('_insert_case_1', node.key)
     if node.parent is None:
       node.color='black'
       return
     else:
-      self.insert_case_2(node)
+      self._insert_case_2(node)
 
-  def insert_case_2(self, node):
+  def _insert_case_2(self, node):
     # self.display()
-    print('insert_case_2', node.key)
+    print('_insert_case_2', node.key)
     if node.parent.color=='black':
       return
     else:
-      self.insert_case_3(node)
+      self._insert_case_3(node)
 
-  def insert_case_3(self, node):
+  def _insert_case_3(self, node):
     # self.display()
-    print('insert_case_3', node.key)
-    uncle = get_uncle(self.root, node.key)
+    print('_insert_case_3', node.key)
+    uncle = node.get_uncle()
     grand_parent =  node.parent.parent
     if uncle is not None and uncle.color=='red':
       node.parent.color='black'
       uncle.color='black'
       grand_parent.color='red'
-      self.insert_case_1(grand_parent)
+      self._insert_case_1(grand_parent)
     else:
-      self.insert_case_4(node)
+      self._insert_case_4(node)
 
-  def insert_case_4(self, node):
+  def _insert_case_4(self, node):
     # self.display()
     grand_parent = node.parent.parent
-    print('insert_case_4', node.key)
+    print('_insert_case_4', node.key)
     if node==node.parent.right and node.parent==grand_parent.left:
       print('rotate_left')
       self.rotate_left(node.parent)
@@ -72,11 +70,11 @@ class RBTree:
       self.rotate_right(node.parent)
       node = node.right
       
-    self.insert_case_5(node)
+    self._insert_case_5(node)
       
-  def insert_case_5(self, node):
+  def _insert_case_5(self, node):
     # self.display()
-    print('insert_case_5', node.key)
+    print('_insert_case_5', node.key)
     parent = node.parent
     grand_parent = parent.parent
     parent.color = 'black'
@@ -88,58 +86,3 @@ class RBTree:
     else:
       print('rotate_left(g)')
       self.rotate_left(grand_parent)
-
-  def rotate_left(self, node):
-    child = node.right
-    parent = node.parent
-
-    if child.left is not None:
-      child.left.parent = node
-
-    node.right = child.left
-    node.parent = child
-    child.left = node
-    child.parent = parent
-
-    if parent is not None:
-      if parent.left == node:
-        parent.left = child
-      else:
-        parent.right = child
-    else:
-      self.root = child
-
-  def rotate_right(self, node):
-    child = node.left
-    parent = node.parent
-
-    if child.right is not None:
-      child.right.parent = node
-
-    node.left = child.right
-    node.parent = child
-    child.right = node
-    child.parent = parent
-
-    if parent is not None:
-      if parent.right == node:
-        parent.right = child
-      else:
-        tree.left = child
-    else:
-      self.root = child
-
-  def display(self):
-    if self.root is not None:
-      self.root.display()
-
-def make_tree(keys): # return Node
-    tree = RBTree()
-    for key in keys:
-        tree.insert(key)
-    return tree
-  
-if __name__ == "__main__":
-  keys = [1, 10, 13]
-  tree = make_tree(keys)
-  #tree.display()

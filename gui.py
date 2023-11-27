@@ -1,5 +1,5 @@
 import sys
-import insert
+import rbtree
 from draw import draw
 from PyQt5.QtWidgets import (QApplication, QWidget, QGridLayout, QLineEdit, QPushButton, QLabel)
 from PyQt5.QtGui import QPixmap
@@ -7,9 +7,9 @@ from PyQt5.QtCore import Qt
 from functools import partial
 
 class MyApp(QWidget):
-  def __init__(self, rbtree):
+  def __init__(self, tree):
       super().__init__()
-      self.rbtree = insert.RBTree() if rbtree is None else rbtree
+      self.rbtree = rbtree.RBTree() if tree is None else tree
       self.initUI()
 
   def initUI(self):
@@ -68,7 +68,7 @@ class MyApp(QWidget):
 
   def update_image_label(self):
     draw(self.rbtree.root)
-    self.img_label.setPixmap(QPixmap('tree.png'))
+    self.img_label.setPixmap(QPixmap('data/tree.png'))
 
 def run(rbtree):
   app = QApplication(sys.argv)
@@ -77,5 +77,5 @@ def run(rbtree):
 
 if __name__ == "__main__":
     keys = [30, 20, 25, 40, 10, 35, 22, 13]
-    rbtree = insert.make_tree(keys)
+    rbtree = rbtree.make_tree(keys)
     run(rbtree)

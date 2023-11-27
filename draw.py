@@ -2,6 +2,7 @@ import graphviz
 
 def draw(root):
     dot = graphviz.Digraph()
+
     if root is not None:
         dot.node(str(root.key), color=root.color)
 
@@ -14,6 +15,6 @@ def draw(root):
                 dot.node(str(node.right.key), color=node.right.color)
                 dot.edge(str(node.key), str(node.right.key))
                 add_nodes_edges(node.right)
-
         add_nodes_edges(root)
-    dot.render('tree', view=False, format='png')
+
+    dot.render('data/tree', view=False, format='png')
