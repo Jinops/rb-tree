@@ -57,17 +57,24 @@ class MyApp(QWidget):
     if value == 'insert':
       self.rbtree.insert(num)
     elif value == 'delete':
-       pass # TODO
+      node = self.rbtree.search(num)
+      if node is None:
+       self.label_status.setText(f'{num} not found')
+       return
+      self.rbtree.delete(node)
     elif value == 'search':
-       pass # TODO
+      node = self.rbtree.search(num)
+      if node is None:
+       self.label_status.setText(f'{num} not found')
+       return
     else:
        return
     self.update_image_label()
-    self.label_status.setText('{}: {}'.format(value, num))
+    self.label_status.setText(f'{value}: {num}')
     self.edit_num.clear()
 
   def update_image_label(self):
-    draw(self.rbtree.root)
+    draw(self.rbtree)
     self.img_label.setPixmap(QPixmap('data/tree.png'))
 
 def run(rbtree):
@@ -78,4 +85,5 @@ def run(rbtree):
 if __name__ == "__main__":
     keys = [30, 20, 25, 40, 10, 35, 22, 13]
     tree = rbtree.generate(keys)
+    # tree = None
     run(tree)
