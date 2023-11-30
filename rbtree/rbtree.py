@@ -4,13 +4,8 @@ from delete import *
 class RBTree(RBTreeInsert, RBTreeDelete):
   pass
 
-def generate(keys): # return Node
+def generate(keys):
     tree = RBTree()
     for key in keys:
         tree.insert(key)
     return tree
-  
-if __name__ == "__main__":
-  keys = [1, 10, 13]
-  tree = generate(keys)
-  #tree.display()
