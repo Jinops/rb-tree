@@ -34,6 +34,8 @@ class RBTreeDelete(RBTreeRotate):
 
 
     def delete_fixup(self, x):
+        if x is None:
+            return
         while x != self.root and (x is None or x.color == 'black'):
             if x == x.parent.left:
                 sibling = x.parent.right
