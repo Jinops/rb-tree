@@ -3,9 +3,9 @@ from rotate import *
 class RBTreeInsert(RBTreeRotate):
   def insert(self, key):
     node = self._bst_insert(key)
-    self.focused = node
     if node is None:
       return
+    self.focused = node
     if self.root is None:
        self.root = node
     self._insert_case_1(node)
@@ -19,6 +19,7 @@ class RBTreeInsert(RBTreeRotate):
         return new_node, new_node
       if node.key == key:
           print(f"Duplicated key: {node.key}")
+          self.focused = node
           return node, None
       if key < node.key: 
           node.left, new_node = self._bst_insert_recur(node.left, key, node)

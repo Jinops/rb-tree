@@ -62,8 +62,6 @@ class MyApp(QWidget):
     checkbox_nil.raise_()
     self.show()
 
-    print(self.size())
-
   def onclick(self, value):
     num = self.edit_num.text()
     if not num.isdecimal():
