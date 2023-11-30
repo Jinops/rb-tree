@@ -1,5 +1,7 @@
 import graphviz
 
+is_nil_visibile=False
+
 def draw(tree):
     graph = graphviz.Digraph()
 
@@ -19,7 +21,7 @@ def draw(tree):
             add_node(node.right)
             graph.edge(str(node.key), str(node.right.key))
             add_nodes_edges(node.right)
-        if node.left is None and node.right is None:
+        if is_nil_visibile and (node.left is None and node.right is None):
             graph.node(f'nil_{node.key}', 'nil', shape='box', width='0.2', height='0.3',\
                      fillcolor='black', fontcolor='white',style='filled')
             graph.edge(str(node.key), f'nil_{node.key}')

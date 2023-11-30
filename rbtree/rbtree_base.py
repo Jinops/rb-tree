@@ -20,6 +20,6 @@ class RBTreeBase:
       return self._search_recur(node.left, key)
     else:
       return self._search_recur(node.right, key)
-  
+
 
     
