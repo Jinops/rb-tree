@@ -3,14 +3,15 @@ import graphviz
 is_nil_visibile=False
 
 def draw(tree):
-    graph = graphviz.Digraph()
+    graph_attr={'nodesep': '0.3', 'ranksep': '0.3'}
+    graph = graphviz.Digraph(graph_attr=graph_attr)
 
     def add_node(node):
         if tree.focused == node:
-            graph.node(str(node.key), color=node.color, fillcolor='#FEF9E7', style='filled')
+            graph.node(str(node.key), color=node.color, width='0.3', height='0.4', fillcolor='#FEF9E7', style='filled')
             tree.focused == None
         else:
-            graph.node(str(node.key), color=node.color)
+            graph.node(str(node.key), color=node.color, width='0.3', height='0.4')
 
     def add_nodes_edges(node):
         if node.left:

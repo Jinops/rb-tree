@@ -4,11 +4,12 @@ class RBTreeInsert(RBTreeRotate):
   def insert(self, key):
     node = self._bst_insert(key)
     if node is None:
-      return
+      return None
     self.focused = node
     if self.root is None:
        self.root = node
     self._insert_case_1(node)
+    return self.focused
 
   def _bst_insert(self, key):
     return self._bst_insert_recur(self.root, key)[1]

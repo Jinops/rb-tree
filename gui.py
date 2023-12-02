@@ -10,6 +10,8 @@ class MyApp(QWidget):
   def __init__(self, tree):
       super().__init__()
       self.tree = rbtree.RBTree() if tree is None else tree
+      self.img_width=600
+      self.img_height=550
       self.initUI()
 
   def initUI(self):
@@ -17,7 +19,7 @@ class MyApp(QWidget):
     self.setLayout(grid)
     self.setWindowTitle('Red-black Tree')
     self.setGeometry(300, 300, 300, 200)
-    self.setFixedSize(700, 560)
+    self.setFixedSize(800, 600)
 
     label_num = QLabel('Input a number below:')
     btn_insert = QPushButton('&Insert', self)
@@ -31,7 +33,7 @@ class MyApp(QWidget):
     self.img_label = QLabel('tree')
     
     self.update_image_label()
-    self.img_label.setFixedSize(500, 500)
+    self.img_label.setFixedSize(self.img_width, self.img_height)
     self.img_label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
     self.img_label.setStyleSheet("background-color: white")
 
@@ -70,7 +72,11 @@ class MyApp(QWidget):
     
     num = int(num)
     if value == 'insert':
-      self.tree.insert(num)
+      node = self.tree.insert(num)
+      if node is None:
+        self.label_status.setText(f'{num} is Duplicated')
+        self.update_image_label()
+        return
     elif value == 'delete':
       node = self.tree.search(num)
       if node is None:
@@ -90,7 +96,11 @@ class MyApp(QWidget):
 
   def update_image_label(self):
     draw.draw(self.tree)
-    self.img_label.setPixmap(QPixmap('data/tree.png'))
+    pixmap = QPixmap('data/tree.png')
+    if pixmap.width() > self.img_width*1.2 or pixmap.height() > self.img_height*1.2:
+      pixmap = pixmap.scaled(int(self.img_width*1.2), int(self.img_height*1.2), Qt.KeepAspectRatio)
+    pixmap.scaled(500, 500, Qt.KeepAspectRatio)
+    self.img_label.setPixmap(pixmap)
 
   def reset(self):
     if self.confirm('reset') == QMessageBox.Yes:
