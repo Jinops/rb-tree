@@ -1,7 +1,9 @@
 from rbtree_base import *
+import draw_tree
 
 class RBTreeRotate(RBTreeBase):
   def rotate_left(self, node):
+    draw_tree.draw(self)
     child = node.right
     parent = node.parent
 

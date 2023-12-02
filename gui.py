@@ -1,7 +1,7 @@
 import sys
 import rbtree.rbtree as rbtree
-import draw
-import data_manager
+import draw_tree
+import image_manager
 from PyQt5.QtWidgets import (QApplication, QWidget, QGridLayout, QLineEdit, QPushButton, QLabel, QMessageBox, QCheckBox)
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
@@ -86,6 +86,7 @@ class MyApp(QWidget):
       self.tree.delete(node)
     elif value == 'search':
       node = self.tree.search(num)
+      print(image_manager.image_list())
       if node is None:
        self.label_status.setText(f'{num} not found')
        return
@@ -96,8 +97,8 @@ class MyApp(QWidget):
     self.edit_num.clear()
 
   def update_image_label(self):
-    draw.draw(self.tree)
-    pixmap = QPixmap(data_manager.path('tree.png'))
+    draw_tree.draw(self.tree)
+    pixmap = QPixmap(image_manager.path())
     if pixmap.width() > self.img_width*1.2 or pixmap.height() > self.img_height*1.2:
       pixmap = pixmap.scaled(int(self.img_width*1.2), int(self.img_height*1.2), Qt.KeepAspectRatio)
     pixmap.scaled(500, 500, Qt.KeepAspectRatio)
@@ -122,7 +123,7 @@ class MyApp(QWidget):
                          QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
 
   def on_checkbox_change(self, state):
-    draw.is_nil_visibile = state == Qt.Checked
+    draw_tree.is_nil_visibile = state == Qt.Checked
     self.update_image_label()
 
 def run(tree):
@@ -137,5 +138,4 @@ def get_sample_tree():
 
 if __name__ == "__main__":
     tree = get_sample_tree()
-    # tree = None
     run(tree)
