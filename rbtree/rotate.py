@@ -22,8 +22,10 @@ class RBTreeRotate(RBTreeBase):
         parent.right = child
     else:
       self.root = child
+    draw_tree.draw(self)
 
   def rotate_right(self, node):
+    draw_tree.draw(self)
     child = node.left
     parent = node.parent
 
@@ -42,3 +44,4 @@ class RBTreeRotate(RBTreeBase):
         parent.left = child
     else:
       self.root = child
+    draw_tree.draw(self)

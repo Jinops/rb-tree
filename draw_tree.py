@@ -1,5 +1,5 @@
 import graphviz
-import image_manager
+import file_manager
 
 is_nil_visibile=False
 def draw(tree):
@@ -32,4 +32,4 @@ def draw(tree):
         add_node(tree.root)
         add_nodes_edges(tree.root)
 
-    graph.render(image_manager.new_path(), view=False, format=image_manager.format, cleanup=True)
+    graph.render(file_manager.new_path(), view=False, format=file_manager.format, cleanup=True)
