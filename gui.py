@@ -1,6 +1,7 @@
 import sys
 import rbtree.rbtree as rbtree
 import draw
+import data_manager
 from PyQt5.QtWidgets import (QApplication, QWidget, QGridLayout, QLineEdit, QPushButton, QLabel, QMessageBox, QCheckBox)
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
@@ -96,7 +97,7 @@ class MyApp(QWidget):
 
   def update_image_label(self):
     draw.draw(self.tree)
-    pixmap = QPixmap('data/tree.png')
+    pixmap = QPixmap(data_manager.path('tree.png'))
     if pixmap.width() > self.img_width*1.2 or pixmap.height() > self.img_height*1.2:
       pixmap = pixmap.scaled(int(self.img_width*1.2), int(self.img_height*1.2), Qt.KeepAspectRatio)
     pixmap.scaled(500, 500, Qt.KeepAspectRatio)

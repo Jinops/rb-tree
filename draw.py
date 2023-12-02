@@ -1,7 +1,7 @@
 import graphviz
+import data_manager
 
 is_nil_visibile=False
-
 def draw(tree):
     graph_attr={'nodesep': '0.3', 'ranksep': '0.3'}
     graph = graphviz.Digraph(graph_attr=graph_attr)
@@ -32,4 +32,4 @@ def draw(tree):
         add_node(tree.root)
         add_nodes_edges(tree.root)
 
-    graph.render('data/tree', view=False, format='png')
+    graph.render(data_manager.path('tree'), view=False, format='png')

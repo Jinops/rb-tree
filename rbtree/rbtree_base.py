@@ -1,5 +1,8 @@
 from node import Node
 
+import os, sys; 
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 class RBTreeBase:
   def __init__(self):
      self.root = None
